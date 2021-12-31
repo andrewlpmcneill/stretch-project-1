@@ -1,0 +1,43 @@
+#pageTitle{
+
+  font-family: Helvetica;
+  text-align: center;
+
+
+}
+
+#pageAuthor{
+
+  text-align: center;
+
+}
+
+#chartTitle{
+
+  font-family: Helvetica;
+
+}
+
+#chartName{
+
+  text-align: center;
+
+}
+
+#options{
+
+  font-family: Helvetica;
+
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: 30% 68%;
+  gap: 1em;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.grid > div{
+  background:#eee;
+  padding:1em;
+}

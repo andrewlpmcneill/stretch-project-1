@@ -1,0 +1,23 @@
+{
+  "name": "stretch-project-1",
+  "version": "0.0.0",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-lighthouselabs": "lighthouse-labs/eslint-config-lighthouselabs"
+  },
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewlpmcneill/stretch-project-1.git"
+  },
+  "author": "Andrew McNeill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrewlpmcneill/stretch-project-1/issues"
+  },
+  "homepage": "https://github.com/andrewlpmcneill/stretch-project-1#readme"
+}
