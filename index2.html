@@ -25,15 +25,28 @@
       <input type="text" id="inputChartNameText">
       <button id="inputChartNameButton">Submit</button>
 
-      <label><br>Number of Bars:</label>
+      <br><br>
+
+      <label>X-Axis Label:</label>
+      <input type="text" id="xAxisLabelText">
+
+      <br>
+
+      <label>Y-Axis Label:</label>
+      <input type="text" id="yAxisLabelText">
+
+      <br><br>
+
+      <label>Number of Bars:</label>
       <input type="text" id="numberOfBarsText">
       <button id="numberOfBarsButton">Submit</button>
 
       <script>
 
-        // Replace Chart Name with Custom One
+        // This seems to be required, I think so that it's loaded first? Not sure
         $(document).ready(function() {
 
+          // Replace Chart Name with Custom One
           //Use jQuery to select the button via its parent, and perform a function
           $('#options').on('click', '#inputChartNameButton', function(){
             // Set a variable to the text field's contents
@@ -43,13 +56,14 @@
 
           });
 
+
            // Add labels and text inputs for the number of bars specified
           $('#options').on('click', '#numberOfBarsButton', function() {
 
             let number = $('#numberOfBarsText').val();
             for (let i = 1; i <= number; i++){
 
-              const label = '<label><br>Bar ' + i + ' Value:</label>';
+              const label = '<br><br><label>Bar ' + i + ' Value:</label>';
               const inputText = '<input type="text" id="bar' + i + 'ValueText">';
               const label2 = '<label><br>Bar ' + i + ' Label:</label>';
               const inputText2 = '<input type="text" id="bar' + i + 'LabelText">';
@@ -58,7 +72,7 @@
 
             }
 
-            const moreOptionsButton = '<br><button id="moreOptionsButton">More Options</button>';
+            const moreOptionsButton = '<br><br><button id="moreOptionsButton">More Options</button>';
             $('#options').append(moreOptionsButton);
 
           })
@@ -82,9 +96,12 @@
               + '<option value="green">Green</option>\n'
               + '</select>';
 
-            const barSpacingLabel = '<br><label>Bar ' + i + ' Value:</label>';
+            const barSpacingLabel = '<br><label>Bar Spacing:</label>';
+            const lessSpacingButton = '<button id="lessSpacingButton">Less</button>';
+            const moreSpacingButton = '<button id="moreSpacingButton">More</button>';
 
-            $('#options').append(barColourLabel, barColourSelect, labelColourLabel, labelColourSelect);
+
+            $('#options').append(barColourLabel, barColourSelect, labelColourLabel, labelColourSelect, barSpacingLabel, lessSpacingButton, moreSpacingButton);
 
           })
 
