@@ -24,21 +24,73 @@
       <label>Chart Name:</label>
       <input type="text" id="inputChartNameText">
       <button id="inputChartNameButton">Submit</button>
+
+      <label><br>Number of Bars:</label>
+      <input type="text" id="numberOfBarsText">
+      <button id="numberOfBarsButton">Submit</button>
+
       <script>
 
         // Replace Chart Name with Custom One
         $(document).ready(function() {
 
           //Use jQuery to select the button via its parent, and perform a function
-          $('#options').on('click', '#inputChartNameButton', function (){
+          $('#options').on('click', '#inputChartNameButton', function(){
             // Set a variable to the text field's contents
-            let newTitle = $("#inputChartNameText").val();
+            let newTitle = $('#inputChartNameText').val();
             // Replace the chart name with the text field's contents
             $('#chartName').text(newTitle);
 
           });
 
+           // Add labels and text inputs for the number of bars specified
+          $('#options').on('click', '#numberOfBarsButton', function() {
+
+            let number = $('#numberOfBarsText').val();
+            for (let i = 1; i <= number; i++){
+
+              const label = '<label><br>Bar ' + i + ' Value:</label>';
+              const inputText = '<input type="text" id="bar' + i + 'ValueText">';
+              const label2 = '<label><br>Bar ' + i + ' Label:</label>';
+              const inputText2 = '<input type="text" id="bar' + i + 'LabelText">';
+
+              $('#options').append(label, inputText, label2, inputText2);
+
+            }
+
+            const moreOptionsButton = '<br><button id="moreOptionsButton">More Options</button>';
+            $('#options').append(moreOptionsButton);
+
+          })
+
+          $('#options').on('click', '#moreOptionsButton', function() {
+
+            // Name is for the data from dropdown menu to be submitted I think... the id is for the label
+            const barColourLabel = '<br><label for="colours">Bar Colour:</label>';
+            const barColourSelect = '<select name="colours" id="colours">\n'
+              + '<option value="blue">Blue</option>\n'
+              + '<option value="red">Red</option>\n'
+              + '<option value="yellow">Yellow</option>\n'
+              + '<option value="green">Green</option>\n'
+              + '</select>';
+
+            const labelColourLabel = '<br><label for="labelColours">Label Colour:</label>';
+            const labelColourSelect = '<select name="labelColours" id="labelColours">\n'
+              + '<option value="blue">Blue</option>\n'
+              + '<option value="red">Red</option>\n'
+              + '<option value="yellow">Yellow</option>\n'
+              + '<option value="green">Green</option>\n'
+              + '</select>';
+
+            const barSpacingLabel = '<br><label>Bar ' + i + ' Value:</label>';
+
+            $('#options').append(barColourLabel, barColourSelect, labelColourLabel, labelColourSelect);
+
+          })
+
         });
+
+
 
       </script>
 
