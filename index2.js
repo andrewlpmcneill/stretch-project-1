@@ -149,6 +149,18 @@ $(document).ready(function() {
 
     }
 
+    const yTickMaxValue = yTickMaxFunction(dataArray);
+    console.log('Y Tick Max = ' + yTickMaxValue + ' ' + typeof yTickMaxValue);
+    const yTickArray = yTicksFunction(yTickMaxValue);
+    console.log('Y Tick Array = ' + yTickArray);
+
+    for (let i = 0; i < yTickArray.length; i++) {
+
+      console.log('Got here at least!');
+      $('#tick' + String(i)).append('<p>' + Number(yTickArray[i]).toFixed(1) + '</p>');
+
+    }
+
   })
 
 
@@ -186,7 +198,7 @@ const drawBarChart = (data, options, element) => {
 
 
 
-}
+};
 
 // HELPER FUNCTION FOR DETERMINING THE VALUE OF THE TOP OF THE Y-AXIS
 const yTickMaxFunction = data => {
@@ -370,5 +382,29 @@ const barHeightFunction = (value, yMax) => {
   const ratio = valueNumber / yMaxNumber;
 
   return String(Math.ceil(ratio * 400));
+
+};
+
+// HELPER FUNCTION FOR DETERMINING ALL 5 Y-AXIS TICKS
+const yTicksFunction = yMax => {
+
+  let yTicksArray = [];
+  const yTicksOneFifth = Number(yMax)/5;
+  for (let i = 1; i <= 5; i++) {
+
+    switch (i) {
+
+      case 5:
+        yTicksArray.push(yMax);
+        break;
+
+      default:
+        yTicksArray.push(String(yTicksOneFifth * i));
+
+    }
+
+  }
+
+  return yTicksArray;
 
 };
