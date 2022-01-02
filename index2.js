@@ -157,7 +157,31 @@ $(document).ready(function() {
 // MAIN FUNCTION FOR GENERATING CHART
 const drawBarChart = (data, options, element) => {
 
-  const yTickMaxValue = yTickMax(data);
+  const yTickMaxValue = yTickMaxFunction(data);
+  //** RETURNS STRING **
+  // With this, we can both determine all our y-ticks,
+  // and use the value to help calculate bar heights
+
+  const sectionWidth = sectionWidthFunction(data);
+  // ** RETURNS NUMBER**
+  // Here we would run loops of data.length length, creating
+  // both HTML and CSS elements
+    // HTML: inside <table id="chart"> <tbody>:
+    //                <tr class="section" id="section' + i + '"">
+    //
+    // CSS: #chart #section + i {left: 0;} etc.
+
+  const spaceArray = barAndSpaceWidthFunction(sectionWidth);
+  const barWidth = spaceArray[0];
+  const spaceWidth = spaceArray[1];
+  const barHeightArray = [];
+
+  // Generate bar heights
+  data.forEach(element => {
+
+    barHeightArray.push(barHeightFunction(element, yTickMaxValue));
+
+  })
 
 
 
@@ -165,7 +189,7 @@ const drawBarChart = (data, options, element) => {
 }
 
 // HELPER FUNCTION FOR DETERMINING THE VALUE OF THE TOP OF THE Y-AXIS
-const yTickMax = data => {
+const yTickMaxFunction = data => {
 
   let yMax = '';
   const numbersData = [];
@@ -285,4 +309,66 @@ const yTickMax = data => {
 
 };
 
-// HELPER FUNCTION FOR DETERMINING THE WIDTH OF THE BARS
+// HELPER FUNCTION FOR DETERMINING SECTION WIDTH
+const sectionWidthFunction = data => {
+
+  const numberOfBars = data.length;
+
+  const nominalWidth = 800 / numberOfBars;
+
+  if (nominalWidth % 1 >= 0.5) {
+
+    $('#chart').css("width", String(Math.ceil(nominalWidth) * numberOfBars));
+    console.log('Changed chart width to ' + String(Math.ceil(nominalWidth) * numberOfBars) + ' pixels.');
+    return Math.ceil(nominalWidth);
+
+  } else if (nominalWidth % 1 < 0.5) {
+
+    $('#chart').css("width", String(Math.floor(nominalWidth) * numberOfBars));
+    console.log('Changed chart width to ' + String(Math.floor(nominalWidth) * numberOfBars) + ' pixels.');
+    return Math.floor(nominalWidth);
+
+  } else {
+
+    return nominalWidth;
+
+  }
+
+};
+
+// HELPER FUNCTION FOR DETERMINING BAR AND SPACE WIDTH
+// **TAKES A NUMBER**
+const barAndSpaceWidthFunction = sectionWidth => {
+
+  // sectionWidth is a NUMBER
+
+  let widthArray = [];
+
+  if (sectionWidth % 2 > 0) {
+
+    let newWidth = Math.ceil(sectionWidth / 2);
+    let newSpace = (sectionWidth - newWidth) / 2;
+    widthArray.push(String(newWidth));
+    widthArray.push(String(newSpace));
+
+  } else {
+
+    widthArray.push(String(sectionWidth / 2));
+    widthArray.push(String(sectionWidth / 4));
+
+  }
+
+  return widthArray;
+
+};
+
+// HELPER FUNCTION FOR DETERMINING BAR HEIGHT FOR A SINGLE VALUE
+const barHeightFunction = (value, yMax) => {
+
+  const yMaxNumber = Number(yMax);
+  const valueNumber = Number(value);
+  const ratio = valueNumber / yMaxNumber;
+
+  return String(Math.ceil(ratio * 400));
+
+};

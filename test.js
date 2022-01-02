@@ -1,4 +1,4 @@
-const yTickMax = data => {
+const yTickMaxFunction = data => {
 
   let yMax = '';
   const numbersData = [];
@@ -117,3 +117,67 @@ const yTickMax = data => {
   return yMax;
 
 };
+
+const sectionWidthFunction = data => {
+
+  const numberOfBars = data.length;
+
+  const nominalWidth = 800 / numberOfBars;
+
+  if (nominalWidth % 1 >= 0.5) {
+
+    //$('#chart').css("width", String(Math.ceil(nominalWidth) * numberOfBars));
+    console.log('Changed chart width to ' + String(Math.ceil(nominalWidth) * numberOfBars) + ' pixels.');
+    return Math.ceil(nominalWidth);
+
+  } else if (nominalWidth % 1 > 0 && nominalWidth % 1 < 0.5) {
+
+    //$('#chart').css("width", String(Math.floor(nominalWidth) * numberOfBars));
+    console.log('Changed chart width to ' + String(Math.floor(nominalWidth) * numberOfBars) + ' pixels.');
+    return Math.floor(nominalWidth);
+
+  } else {
+
+    return nominalWidth;
+
+  }
+
+};
+
+const barAndSpaceWidthFunction = sectionWidth => {
+
+  // sectionWidth is a NUMBER
+
+  let widthArray = [];
+
+  if (sectionWidth % 2 > 0) {
+
+    let newWidth = Math.ceil(sectionWidth / 2);
+    let newSpace = (sectionWidth - newWidth) / 2;
+    widthArray.push(String(newWidth));
+    widthArray.push(String(newSpace));
+
+  } else {
+
+    widthArray.push(String(sectionWidth / 2));
+    widthArray.push(String(sectionWidth / 4));
+
+  }
+
+  return widthArray;
+
+};
+
+const barHeightFunction = (value, yMax) => {
+
+  const yMaxNumber = Number(yMax);
+  const valueNumber = Number(value);
+  const ratio = valueNumber / yMaxNumber;
+
+  return String(Math.ceil(ratio * 400));
+
+};
+
+let val = '4.31';
+let y = '5';
+console.log(typeof barHeightFunction(val,y));

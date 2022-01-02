@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
   <title>Bar Chart Generator</title>
   <link rel="stylesheet" href="style.css">
   <script src="jquery-3.6.0.js"></script>
+
 </head>
 
+
 <body>
+
   <div class="grid">
+
 
     <div id="pageTitle">
 
@@ -17,15 +23,16 @@
 
     </div>
 
+
     <div id="chartTitle">
 
       <h1 id="chartName">Chart Title</h1>
 
     </div>
 
+
     <div id="options">
 
-      <!-- insert buttons and text enter-ers here -->
       <label>Chart Name:</label>
       <input type="text" id="inputChartNameText">
       <button id="inputChartNameButton">Submit</button>
@@ -39,15 +46,36 @@
     </div>
 
 
-    <div id="chart">
+    <!-- **CHART HTML GOES HERE! -->
+    <div id="chart1">
 
-      <!-- insert chart here -->
+      <table id="chart">
+
+        <tbody>
+
+          <!-- <tr> and <td> go here -->
+
+        </tbody>
+
+      </table>
+
+
+    <!-- Y-AXIS TICKS -->
+    <div id="ticks">
+
+      <div class="tick final" style="height: 80px;"><p></p></div>
+      <div class="tick" style="height: 80px;"><p></p></div>
+      <div class="tick" style="height: 80px;"><p></p></div>
+      <div class="tick" style="height: 80px;"><p></p></div>
+      <div class="tick" style="height: 80px;"><p></p></div>
+
+    </div>
 
     </div>
 
   </div>
 
-  <script src="index.js"></script>
+  <script src="index2.js"></script>
 
 </body>
 
