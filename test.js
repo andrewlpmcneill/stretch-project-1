@@ -178,6 +178,52 @@ const barHeightFunction = (value, yMax) => {
 
 };
 
-let val = '4.31';
-let y = '5';
-console.log(typeof barHeightFunction(val,y));
+const yTicksFunction = yMax => {
+
+  let yTicksArray = [];
+  const yTicksOneFifth = Number(yMax)/5;
+  for (let i = 1; i <= 5; i++) {
+
+    switch (i) {
+
+      case 5:
+        yTicksArray.push(yMax);
+        break;
+
+      default:
+        yTicksArray.push(String(yTicksOneFifth * i));
+
+    }
+
+  }
+
+  return yTicksArray;
+
+};
+
+const drawBars = data => {
+
+  const sectionWidth = sectionWidthFunction(data);
+  const barAndSpaceWidth = barAndSpaceWidthFunction(sectionWidth);
+  // WE NOW HAVE AN ARRAY -> INDEX 0 IS BAR WIDTH, 1 IS SPACE WIDTH
+  const barWidth = barAndSpaceWidth[0];
+  const spaceWidth = barAndSpaceWidth[1];
+  // TIME FOR HEIGHT
+  const yTickMaxValue = yTickMaxFunction(data);
+  for (let i = 0; i < data.length; i++) {
+
+    const barHeight = barHeightFunction(data[i], yTickMaxValue);
+    console.log(barHeight + ' ' + typeof barHeight);
+
+  }
+
+  // TIME TO SET HTML AND CSS FOR WIDTH AND HEIGHT
+
+  //$('#bars').append('<tr>\n\t<td id="bar' + i + '" style="left: ' + spaceWidth + 'px; width: ' + barWidth + 'px; height: ')
+
+  return;
+
+};
+
+const array = ['1','2','3'];
+console.log(drawBars(array));

@@ -115,7 +115,7 @@ $(document).ready(function() {
       dataArray.push(valueValue);
 
 
-      //CONSTRUCT 'options' ARGUMENT
+    //CONSTRUCT 'options' ARGUMENT
 
       // Bar Colours:
       const barColourSelector = '#colours' + i;
@@ -149,17 +149,7 @@ $(document).ready(function() {
 
     }
 
-    const yTickMaxValue = yTickMaxFunction(dataArray);
-    console.log('Y Tick Max = ' + yTickMaxValue + ' ' + typeof yTickMaxValue);
-    const yTickArray = yTicksFunction(yTickMaxValue);
-    console.log('Y Tick Array = ' + yTickArray);
-
-    for (let i = 0; i < yTickArray.length; i++) {
-
-      console.log('Got here at least!');
-      $('#tick' + String(i)).append('<p>' + Number(yTickArray[i]).toFixed(1) + '</p>');
-
-    }
+    drawBarChart(dataArray);
 
   })
 
@@ -167,38 +157,34 @@ $(document).ready(function() {
 });
 
 // MAIN FUNCTION FOR GENERATING CHART
-const drawBarChart = (data, options, element) => {
+const drawBarChart = (data) => {
 
-  const yTickMaxValue = yTickMaxFunction(data);
-  //** RETURNS STRING **
-  // With this, we can both determine all our y-ticks,
-  // and use the value to help calculate bar heights
-
-  const sectionWidth = sectionWidthFunction(data);
-  // ** RETURNS NUMBER**
-  // Here we would run loops of data.length length, creating
-  // both HTML and CSS elements
-    // HTML: inside <table id="chart"> <tbody>:
-    //                <tr class="section" id="section' + i + '"">
-    //
-    // CSS: #chart #section + i {left: 0;} etc.
-
-  const spaceArray = barAndSpaceWidthFunction(sectionWidth);
-  const barWidth = spaceArray[0];
-  const spaceWidth = spaceArray[1];
-  const barHeightArray = [];
-
-  // Generate bar heights
-  data.forEach(element => {
-
-    barHeightArray.push(barHeightFunction(element, yTickMaxValue));
-
-  })
-
-
-
+  drawYTicks(data);
+  drawBars(data);
 
 };
+
+  // const sectionWidth = sectionWidthFunction(data);
+  // // ** RETURNS NUMBER**
+  // // Here we would run loops of data.length length, creating
+  // // both HTML and CSS elements
+  //   // HTML: inside <table id="chart"> <tbody>:
+  //   //                <tr class="section" id="section' + i + '"">
+  //   //
+  //   // CSS: #chart #section + i {left: 0;} etc.
+
+  // const spaceArray = barAndSpaceWidthFunction(sectionWidth);
+  // const barWidth = spaceArray[0];
+  // const spaceWidth = spaceArray[1];
+  // const barHeightArray = [];
+
+  // // Generate bar heights
+  // data.forEach(element => {
+
+  //   barHeightArray.push(barHeightFunction(element, yTickMaxValue));
+
+  // })
+
 
 // HELPER FUNCTION FOR DETERMINING THE VALUE OF THE TOP OF THE Y-AXIS
 const yTickMaxFunction = data => {
@@ -406,5 +392,53 @@ const yTicksFunction = yMax => {
   }
 
   return yTicksArray;
+
+};
+
+// HELPER FUNCTION FOR DRAWING ALL Y-AXIS TICKS
+const drawYTicks = data => {
+
+  const yTickMaxValue = yTickMaxFunction(data);
+  const yTickArray = yTicksFunction(yTickMaxValue);
+
+  for (let i = 0; i < yTickArray.length; i++) {
+
+    if (yTickMaxValue % 5 > 0) {
+
+      $('#tick' + String(i)).append('<p>' + Number(yTickArray[i]).toFixed(1) + '</p>');
+
+    } else {
+
+      $('#tick' + String(i)).append('<p>' + Number(yTickArray[i]) + '</p>');
+
+    }
+
+
+  }
+
+};
+
+const drawBars = data => {
+
+  const sectionWidth = sectionWidthFunction(data);
+  console.log('Section width: ' + sectionWidth);
+  const barAndSpaceWidth = barAndSpaceWidthFunction(sectionWidth);
+  // WE NOW HAVE AN ARRAY -> INDEX 0 IS BAR WIDTH, 1 IS SPACE WIDTH
+  const barWidth = barAndSpaceWidth[0];
+  const spaceWidth = barAndSpaceWidth[1];
+  // TIME FOR HEIGHT
+  const yTickMaxValue = yTickMaxFunction(data);
+
+
+
+  // SETTING FUNCTION
+  for (let i = 0; i < data.length; i++) {
+
+    const leftCalculation = String(Number(spaceWidth) + (Number(sectionWidth) * i));
+
+    const barHeight = barHeightFunction(data[i], yTickMaxValue);
+    $('#bars').append('<tr>\n\t<td id="bar' + String(i + 1) + '" style="background: rgb(148, 148, 148); left: ' + leftCalculation + 'px; width: ' + barWidth + 'px; height: ' + barHeight + 'px;">\n\t<p>' + data[i] + '</p>\n</td>\n</tr>');
+
+  }
 
 };
