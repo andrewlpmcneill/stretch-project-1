@@ -123,6 +123,10 @@ $(document).ready(function() {
       const barColourKeyName = 'bar' + i + 'Colour';
       options[barColourKeyName] = barColour;
 
+      // Value:
+      const valueKeyName = 'value' + i;
+      options[valueKeyName] = valueValue;
+
       // Value (text) Colour:
       const valueColourSelector = '#valueColours' + i;
       const valueColour = $(valueColourSelector).val();
@@ -149,7 +153,7 @@ $(document).ready(function() {
 
     }
 
-    drawBarChart(dataArray);
+    drawBarChart(dataArray, options);
 
   })
 
@@ -157,33 +161,13 @@ $(document).ready(function() {
 });
 
 // MAIN FUNCTION FOR GENERATING CHART
-const drawBarChart = (data) => {
+const drawBarChart = (data, options) => {
 
   drawYTicks(data);
-  drawBars(data);
+  drawBars(data, options);
+
 
 };
-
-  // const sectionWidth = sectionWidthFunction(data);
-  // // ** RETURNS NUMBER**
-  // // Here we would run loops of data.length length, creating
-  // // both HTML and CSS elements
-  //   // HTML: inside <table id="chart"> <tbody>:
-  //   //                <tr class="section" id="section' + i + '"">
-  //   //
-  //   // CSS: #chart #section + i {left: 0;} etc.
-
-  // const spaceArray = barAndSpaceWidthFunction(sectionWidth);
-  // const barWidth = spaceArray[0];
-  // const spaceWidth = spaceArray[1];
-  // const barHeightArray = [];
-
-  // // Generate bar heights
-  // data.forEach(element => {
-
-  //   barHeightArray.push(barHeightFunction(element, yTickMaxValue));
-
-  // })
 
 
 // HELPER FUNCTION FOR DETERMINING THE VALUE OF THE TOP OF THE Y-AXIS
@@ -418,7 +402,8 @@ const drawYTicks = data => {
 
 };
 
-const drawBars = data => {
+// HELPER FUNCTION FOR DRAWING ALL BARS, VALUES, AND LABELS
+const drawBars = (data, options) => {
 
   const sectionWidth = sectionWidthFunction(data);
   console.log('Section width: ' + sectionWidth);
@@ -430,14 +415,69 @@ const drawBars = data => {
   const yTickMaxValue = yTickMaxFunction(data);
 
 
-
   // SETTING FUNCTION
   for (let i = 0; i < data.length; i++) {
 
+    // Make the bar
     const leftCalculation = String(Number(spaceWidth) + (Number(sectionWidth) * i));
-
     const barHeight = barHeightFunction(data[i], yTickMaxValue);
-    $('#bars').append('<tr>\n\t<td id="bar' + String(i + 1) + '" style="background: rgb(148, 148, 148); left: ' + leftCalculation + 'px; width: ' + barWidth + 'px; height: ' + barHeight + 'px;">\n\t<p>' + data[i] + '</p>\n</td>\n</tr>');
+
+    // Add bar height to options object:
+    const barHeightKeyName = 'bar' + (i + 1) + 'Height';
+    options[barHeightKeyName] = barHeight;
+
+    // Fetch and declare value placement to top, middle, or bottom:
+    const valuePlacementKeyName = 'value' + (i + 1) + 'Placement';
+    const valuePlacementSetting = options[valuePlacementKeyName];
+    let margin = 0;
+    switch (valuePlacementSetting) {
+
+      case 'top':
+        margin = 10;
+        break;
+
+      case 'middle':
+        margin = (Number(barHeight) - 10) / 2;
+        break;
+
+      case 'bottom':
+        margin = Number(barHeight) - 10;
+
+    }
+
+    // Fetch and declare label
+    const labelTextKeyName = 'bar' + (i + 1) + 'LabelText';
+    const labelText = options[labelTextKeyName];
+    let labelMargin = 0;
+    switch (valuePlacementSetting) {
+
+      case 'bottom':
+        labelMargin = 10;
+        break;
+
+      case 'middle':
+        labelMargin = (Number(barHeight) / 2) + 5;
+        break;
+
+      case 'top':
+        labelMargin = Number(barHeight) - 10;
+
+    }
+
+    // Fetch and declare bar colour
+    const barColourKeyName = 'bar' + (i + 1) + 'Colour';
+    const barColour = options[barColourKeyName];
+
+    // Fetch and declare value colour
+    const valueColourKeyName = 'value' + (i + 1) + 'Colour';
+    const valueColour = options[valueColourKeyName];
+
+    // Fetch and declare label colour
+    const labelColourKeyName = 'label' + (i + 1) + 'Colour';
+    const labelColour = options[labelColourKeyName];
+
+    // Add bar height, bar colour, value, value placement, and label to HTML with appropriate CSS:
+    $('#bars').append('<tr>\n\t<td id="bar' + String(i + 1) + '" style="border-style: solid; border-width: thin; background: ' + barColour + '; left: ' + leftCalculation + 'px; width: ' + barWidth + 'px; height: ' + barHeight + 'px;">\n\t\t<p style="color: ' + valueColour + '; margin: ' + margin + 'px 0 0;">' + data[i] + '</p>\n\t\t<p style="color: ' + labelColour + '; margin: ' + labelMargin +'px 0 0;">' + labelText + '</p>\n\t</td>\n</tr>');
 
   }
 

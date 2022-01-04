@@ -91,7 +91,7 @@
 
 
 /* TICKS */
-#ticks {position: relative; top: -405px; left: 0; z-index: 1; font: 9px Helvetica}
+#ticks {position: relative; top: -400px; left: 0; z-index: 1; font: 9px Helvetica}
 /* HORIZONTAL GRID */
 #ticks .tick {position: relative; border-bottom: 1px solid #BBB; width: 803px;}
 #ticks .tick p {position: absolute; left: 100%; top: -0.67em; margin: 0 0 0 0.5em;}
