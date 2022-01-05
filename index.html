@@ -5,7 +5,7 @@
 
   <meta charset="UTF-8">
   <title>Bar Chart Generator</title>
-  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="style.css">
   <script src="jquery-3.6.0.js"></script>
 
 </head>
@@ -35,6 +35,22 @@
 
       <label>Chart Name:</label>
       <input type="text" id="inputChartNameText">
+      <select name="chartNameColour" id="chartNameColour">
+        <option value="black">Black</option>
+        <option value="white">White</option>
+        <option value="blue">Blue</option>
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+      </select>
+      <select name="chartNameSize" id="chartNameSize">
+        <option value="18pt">18pt</option>
+        <option value="24pt">24pt</option>
+        <option value="36pt">36pt</option>
+        <option value="48pt">48pt</option>
+        <option value="60pt">60pt</option>
+        <option value="72pt">72pt</option>
+      </select>
       <button id="inputChartNameButton">Submit</button>
 
       <br><br>
@@ -47,35 +63,15 @@
 
 
     <!-- **CHART HTML GOES HERE! -->
-    <div id="chart1">
-
-      <table id="chart">
-
-        <tbody id="bars">
-
-          <!-- <tr> and <td> go here -->
-
-        </tbody>
-
-      </table>
+    <div id="chart1" style="width: 810px; height: 410px;">
 
 
-    <!-- Y-AXIS TICKS -->
-    <div id="ticks">
-
-      <div class="tick" id="tick4" style="height: 79px;"><!-- insert yTickMax here --></div>
-      <div class="tick" id="tick3" style="height: 79px;"><!-- insert yTick 4 here --></div>
-      <div class="tick" id="tick2" style="height: 79px;"><!-- insert yTick 3 here --></div>
-      <div class="tick" id="tick1" style="height: 79px;"><!-- insert yTick 2 here --></div>
-      <div class="tick" id="tick0" style="height: 79px;"><!-- insert yTick 1 here --></div>
-
-    </div>
 
     </div>
 
   </div>
 
-  <script src="index2.js"></script>
+  <script src="index.js"></script>
 
 </body>
 
