@@ -1,3 +1,8 @@
+
+// Andrew McNeill, December 2021
+
+
+
 // MAIN FUNCTION FOR GENERATING CHART
 const drawBarChart = (data, options, element) => {
 
