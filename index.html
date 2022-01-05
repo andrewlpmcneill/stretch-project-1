@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
 
-  <meta charset="UTF-8">
-  <title>Bar Chart Generator</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="jquery-3.6.0.js"></script>
+    <meta charset="UTF-8">
+    <title>Bar Chart Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery-3.6.0.js"></script>
+    <script src="barChartAPI_test.js"></script>
 
-</head>
-
-
-<body>
-
-  <div class="grid">
+  </head>
 
 
-    <div id="pageTitle">
+  <body>
 
-      <h2>Bar Chart Generator</h1>
-      <h3 id='pageAuthor'>Andrew McNeill 2021</h2>
+    <div class="grid">
+
+
+      <div id="pageTitle">
+
+        <h2>Bar Chart Generator</h1>
+        <h3 id='pageAuthor'>Andrew McNeill 2021</h3>
+
+      </div>
+
+      <div id="chartTitle">
+
+        <h1 id="chartName">Chart Title</h1>
+
+      </div>
+
+
+      <div id="options">
+
+        <label>Chart Name:</label>
+        <input type="text" id="inputChartNameText">
+        <select name="chartNameColour" id="chartNameColour">
+          <option value="black">Black</option>
+          <option value="white">White</option>
+          <option value="blue">Blue</option>
+          <option value="red">Red</option>
+          <option value="yellow">Yellow</option>
+          <option value="green">Green</option>
+        </select>
+        <select name="chartNameSize" id="chartNameSize">
+          <option value="18pt">18pt</option>
+          <option value="24pt">24pt</option>
+          <option value="36pt">36pt</option>
+          <option value="48pt">48pt</option>
+          <option value="60pt">60pt</option>
+          <option value="72pt">72pt</option>
+        </select>
+        <button id="inputChartNameButton">Submit</button>
+
+        <br><br>
+
+        <label>Number of Bars:</label>
+        <input type="text" id="numberOfBarsText">
+        <button id="numberOfBarsButton">Submit</button>
+
+      </div>
+
+
+      <!-- **CHART HTML GOES HERE! -->
+      <div id="chart1" style="width: 810px; height: 410px;">
+
+
+
+      </div>
 
     </div>
 
+    <script src="index.js"></script>
 
-    <div id="chartTitle">
-
-      <h1 id="chartName">Chart Title</h1>
-
-    </div>
-
-
-    <div id="options">
-
-      <label>Chart Name:</label>
-      <input type="text" id="inputChartNameText">
-      <select name="chartNameColour" id="chartNameColour">
-        <option value="black">Black</option>
-        <option value="white">White</option>
-        <option value="blue">Blue</option>
-        <option value="red">Red</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-      </select>
-      <select name="chartNameSize" id="chartNameSize">
-        <option value="18pt">18pt</option>
-        <option value="24pt">24pt</option>
-        <option value="36pt">36pt</option>
-        <option value="48pt">48pt</option>
-        <option value="60pt">60pt</option>
-        <option value="72pt">72pt</option>
-      </select>
-      <button id="inputChartNameButton">Submit</button>
-
-      <br><br>
-
-      <label>Number of Bars:</label>
-      <input type="text" id="numberOfBarsText">
-      <button id="numberOfBarsButton">Submit</button>
-
-    </div>
-
-
-    <!-- **CHART HTML GOES HERE! -->
-    <div id="chart1" style="width: 810px; height: 410px;">
-
-
-
-    </div>
-
-  </div>
-
-  <script src="index.js"></script>
-
-</body>
+  </body>
 
 </html>
