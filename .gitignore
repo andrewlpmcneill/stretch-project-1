@@ -1,0 +1,8 @@
+node_modules
+.editorconfig
+.eslintrc.js
+package.json
+barChartAPI_test.js
+index_oldWorking.html
+index3.html
+style_oldWorking.css
